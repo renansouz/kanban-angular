@@ -1,0 +1,49 @@
+<div class="task-container">
+  <!-- To Do List -->
+  <div class="column">
+    <h3>To Do</h3>
+    <div 
+      cdkDropList 
+      #todoList="cdkDropList" 
+      [cdkDropListData]="tasks" 
+      [cdkDropListConnectedTo]="[inProgressList, doneList]" 
+      class="task-list" 
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let task of tasks" cdkDrag class="task-card">
+        {{ task }}
+      </div>
+    </div>
+  </div> <!-- Closing div for To Do -->
+
+  <!-- In Progress -->
+  <div class="column">
+    <h3>In Progress</h3>
+    <div 
+      cdkDropList 
+      #inProgressList="cdkDropList" 
+      [cdkDropListData]="inProgress" 
+      [cdkDropListConnectedTo]="[todoList, doneList]" 
+      class="task-list" 
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let task of inProgress" cdkDrag class="task-card">
+        {{ task }}
+      </div>
+    </div>
+  </div> <!-- Closing div for In Progress -->
+
+  <!-- Done -->
+  <div class="column">
+    <h3>Done</h3>
+    <div 
+      cdkDropList 
+      #doneList="cdkDropList" 
+      [cdkDropListData]="done" 
+      [cdkDropListConnectedTo]="[todoList, inProgressList]" 
+      class="task-list" 
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let task of done" cdkDrag class="task-card">
+        {{ task }}
+      </div>
+    </div>
+  </div> <!-- Closing div for Done -->
+</div> <!-- Closing div for task-container -->
