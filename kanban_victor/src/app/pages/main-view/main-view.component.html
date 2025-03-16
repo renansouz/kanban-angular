@@ -1,0 +1,32 @@
+<div class="root">
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <h1 class="app-name">Kanban Victor</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="board-bar">
+      <h2 class="board-name has-gradient-text">Kanban Board</h2>
+    </div>
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+          <div class="column-title">{{ column.name }}</div>
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="task" *ngFor="let task of column.tasks" cdkDrag>
+              {{ task }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
