@@ -21,27 +21,9 @@
       </div>
     </div>
   </div>
-
   <div class="board">
     <div class="board-bar">
-      <p class="board-name has-gradient-text">Tasks List</p>
-    </div>
-    <div class="board-wrapper">
-      <div class="board-columns" cdkDropListGroup>
-        <div class="board-column" *ngFor="let column of board.columns">
-          <div class="column-title">{{ column.name }}</div>
-          <div
-            class="tasks-container"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <div class="task" *ngFor="let task of column.tasks" cdkDrag>
-              {{ task }}
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="board-name has-gradient-text">About</p>
     </div>
   </div>
 </div>

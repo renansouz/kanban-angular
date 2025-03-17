@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-about',
   imports: [
     MatToolbarModule,
     MatIconModule,
@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
     MatSidenavModule,
     MatListModule,
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.scss',
 })
-export class HomeComponent {
+export class AboutComponent {
   constructor(private router: Router) {}
 
   navigateTo(path: string) {

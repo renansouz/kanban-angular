@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { Router } from '@angular/router';
 
 import {
   CdkDragDrop,
@@ -30,7 +31,11 @@ import {
   styleUrl: './main-view.component.scss',
 })
 export class MainViewComponent {
-  constructor() {}
+  constructor(private router: Router) {}
+
+  navigateTo(path: string) {
+    this.router.navigate([path]); // Redireciona para a página correta
+  }
 
   board: Board = new Board('test Board', [
     new Column('Ideas', ['Some random idea', 'Vai tomando', 'BTC']),
