@@ -1,0 +1,70 @@
+<div class="root">
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <a class="navbar-item" (click)="drawer.toggle()">
+        <mat-icon class="menu-button">menu</mat-icon>
+      </a>
+      <mat-drawer #drawer mode="side" class="drawer">
+        <div class="drawer-links">
+          <a mat-list-item (click)="navigateTo('/home')">Home</a>
+          <a mat-list-item (click)="navigateTo('/tasks')">Tasks</a>
+          <a mat-list-item (click)="navigateTo('/about')">About</a>
+        </div>
+      </mat-drawer>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a mat-button routerLink="/login" class="auth-button">Login</a>
+        <span class="divider">|</span>
+        <a mat-button routerLink="/register" class="auth-button">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name has-gradient-text">Task List</p>
+    </div>
+
+    <div class="task-form">
+      <mat-form-field>
+        <mat-label>New Task</mat-label>
+        <input matInput [(ngModel)]="newTask" />
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" (click)="addTask()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+          <div class="column-title">{{ column.name }}</div>
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="task"
+              *ngFor="let task of column.tasks; let i = index"
+              cdkDrag
+            >
+              {{ task }}
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteTask(column, i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

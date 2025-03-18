@@ -1,0 +1,29 @@
+<div class="root">
+  <div class="navbar has-background-dark">
+    <div class="navbar-brand">
+      <a class="navbar-item" (click)="drawer.toggle()">
+        <mat-icon class="menu-button">menu</mat-icon>
+      </a>
+      <mat-drawer #drawer mode="side" class="drawer">
+        <div class="drawer-links">
+          <a mat-list-item (click)="navigateTo('/home')">Home</a>
+          <a mat-list-item (click)="navigateTo('/tasks')">Tasks</a>
+          <a mat-list-item (click)="navigateTo('/about')">About</a>
+        </div>
+      </mat-drawer>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a mat-button routerLink="/login" class="auth-button">Login</a>
+        <span class="divider">|</span>
+        <a mat-button routerLink="/register" class="auth-button">Register</a>
+      </div>
+    </div>
+  </div>
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name has-gradient-text">Home</p>
+    </div>
+  </div>
+</div>

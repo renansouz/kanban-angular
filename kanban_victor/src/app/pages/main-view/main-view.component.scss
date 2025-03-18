@@ -1,0 +1,183 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-name {
+  font-size: 28px;
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+}
+
+.has-gradient-text {
+  background: -webkit-linear-gradient(#f71381, #f52aeb);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.drawer-links {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-top: 13px;
+  gap: 20px;
+}
+
+.drawer a {
+  font-size: 18px;
+  font-weight: 400;
+  color: #a8a6a7;
+  text-decoration: none;
+}
+
+.menu-button {
+  color: #a8a6a7;
+}
+
+.auth-button:hover {
+  text-decoration: underline;
+}
+
+.auth-button {
+  color: #a8a6a7 !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+}
+
+.drawer a:hover {
+  text-decoration: underline !important;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  .board-bar {
+    background: rgba(gray, 0.5);
+    padding: 8px 15px;
+
+    .board-name {
+      font-size: 25px;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .board-wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow-x: auto;
+    margin-bottom: 10px;
+
+    .board-columns {
+      display: flex;
+      flex-grow: 1;
+
+      .board-column {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 0;
+
+        min-width: 300px;
+        min-height: 500px;
+
+        margin: 50px;
+        padding: 25px;
+
+        border-radius: 5px;
+
+        background: rgba(255, 255, 255, 0.5);
+
+        &:not(:first-child) {
+          margin-left: 0;
+        }
+
+        .column-title {
+          font-size: 20px;
+          font-weight: 800;
+          font-family: "Lato", sans-serif;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+          color: rgb(255, 255, 255);
+        }
+      }
+    }
+  }
+}
+
+.tasks-container {
+  flex-grow: 1;
+}
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 12px;
+  background: white;
+  border-bottom: solid 1px #ddd;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+
+  margin-bottom: 8px;
+
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.5),
+    0 3px 14px 2px rgba(0, 0, 0, 0.5);
+}
+
+.task button {
+  visibility: hidden;
+}
+
+.task:hover button {
+  visibility: visible;
+}
+
+.task-form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-top: 25px;
+}
+
+.task-form button {
+  height: 40px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  margin-left: 5px;
+}
+
+.task-form input {
+  color: black;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
