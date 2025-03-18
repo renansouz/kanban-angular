@@ -1,2 +1,6 @@
 # kanban-ng
-Final project greystone college 
+
+Final Project Greystone
+
+Renan Souza Silva
+Victor Costa Nova
