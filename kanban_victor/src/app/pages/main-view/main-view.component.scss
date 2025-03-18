@@ -120,6 +120,8 @@
 }
 .task {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px 12px;
   background: white;
   border-bottom: solid 1px #ddd;
@@ -127,10 +129,38 @@
   color: black;
   cursor: pointer;
 
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.5),
     0 3px 14px 2px rgba(0, 0, 0, 0.5);
+}
+
+.task button {
+  visibility: hidden;
+}
+
+.task:hover button {
+  visibility: visible;
+}
+
+.task-form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-top: 25px;
+}
+
+.task-form button {
+  height: 40px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  margin-left: 5px;
+}
+
+.task-form input {
+  color: black;
 }
 
 .cdk-drag-preview {

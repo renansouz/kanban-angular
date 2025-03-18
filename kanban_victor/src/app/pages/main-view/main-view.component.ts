@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Board } from '../../models/board.model';
 import { Column } from '../../models/column.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +22,9 @@ import {
 @Component({
   selector: 'app-main-view',
   imports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -34,24 +40,13 @@ export class MainViewComponent {
   constructor(private router: Router) {}
 
   navigateTo(path: string) {
-    this.router.navigate([path]); // Redireciona para a página correta
+    this.router.navigate([path]);
   }
 
   board: Board = new Board('test Board', [
-    new Column('Ideas', ['Some random idea', 'Vai tomando', 'BTC']),
-    new Column('In Progress', [
-      'Get to work',
-      'Pick up groceries',
-      'Go home',
-      'Fall asleep',
-    ]),
-    new Column('Done', [
-      'Get up',
-      'Brush teeth',
-      'Take a shower',
-      'Check e-mail',
-      'Walk dog',
-    ]),
+    new Column('Ideas', []),
+    new Column('In Progress', []),
+    new Column('Done', []),
   ]);
 
   drop(event: CdkDragDrop<string[]>) {
@@ -69,5 +64,25 @@ export class MainViewComponent {
         event.currentIndex
       );
     }
+  }
+
+  newTask: string = '';
+
+  addTask() {
+    if (this.newTask.trim()) {
+      // Procura a coluna "Ideas"
+      const ideasColumn = this.board.columns.find(
+        (col) => col.name === 'Ideas'
+      );
+
+      if (ideasColumn) {
+        ideasColumn.tasks.push(this.newTask.trim());
+        this.newTask = ''; // Limpa o input
+      }
+    }
+  }
+
+  deleteTask(column: Column, taskIndex: number) {
+    column.tasks.splice(taskIndex, 1);
   }
 }
