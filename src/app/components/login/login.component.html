@@ -1,0 +1,32 @@
+<div class="login-container">
+    <div class="login-header">
+        <h2 class="login-title">Login to KanbanNG</h2>
+    </div>
+    <div class="login-form">
+        <div class="input-fields">
+            <p>
+                <mat-form-field appearance="fill" class="login-input">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Type your email" type="email">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="login-input">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Type your password" type="password">
+                </mat-form-field>
+            </p>
+        </div>
+        <div class="buttons-container">
+            <div class="login-button-container">
+                <button mat-raised-button class="login-button">Login</button>
+            </div>
+            <div class="register-google-container">
+                <button mat-flat-button class="register-button" [routerLink]="['/register']">Register</button>
+                <button mat-flat-button class="login-with-google" (click)="loginWithGoogle()">Login with Google</button>
+            </div>
+            <a [routerLink]="['/']" class="forgot-password-link">Forgot password?</a>
+        </div>
+        
+        
+    </div>
+</div>
+

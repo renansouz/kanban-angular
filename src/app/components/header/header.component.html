@@ -1,0 +1,16 @@
+<mat-toolbar class="toolbar-container">
+    @if (userInfo()) {
+        <span class="username title">Hello, {{ userInfo()?.displayName }}</span>
+    } @else {
+        <a class="title" [routerLink]="['/']">KanbanNG</a>
+    }
+    <span class="spacer"></span>
+    <div class="buttons">
+        @if (!userInfo()) {
+            <button mat-flat-button class="auth-button" [routerLink]="['/login']">Login</button>
+            <button mat-flat-button class="auth-button" [routerLink]="['/register']">Register</button>
+        } @else {
+            <button mat-flat-button class="auth-button" (click)="logout()">Log out</button>
+        }
+    </div>
+</mat-toolbar>

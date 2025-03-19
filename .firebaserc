@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "kanban-ng-1718d"
-  }
+    "default": "kanban-ng-ea027",
+    "main": "kanban-ng-ea027"
+  },
+  "targets": {},
+  "etags": {}
 }

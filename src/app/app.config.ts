@@ -25,8 +25,7 @@ export const appConfig: ApplicationConfig = {
       storageBucket: environment.firebaseConfig.storageBucket, 
       apiKey: environment.firebaseConfig.apiKey, 
       authDomain: environment.firebaseConfig.authDomain, 
-      messagingSenderId: environment.firebaseConfig.messagingSenderId, 
-      measurementId: environment.firebaseConfig.measurementId 
+      messagingSenderId: environment.firebaseConfig.messagingSenderId
     })), 
     provideAuth(() => getAuth()), 
     provideAnalytics(() => getAnalytics()), 
@@ -38,6 +37,6 @@ export const appConfig: ApplicationConfig = {
     provideMessaging(() => getMessaging()), 
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()), 
-    provideVertexAI(() => getVertexAI())
+    provideVertexAI(() => getVertexAI()), 
   ]
 };

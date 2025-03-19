@@ -1,0 +1,21 @@
+.toolbar-container {
+    background: rgb(2,0,36);
+    background: linear-gradient(270deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
+}
+
+.title {
+    color: #fff;
+    text-decoration: none;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.auth-button {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+.auth-button:last-child {
+    margin-right: 0; /* Remove margin from the last button */
+}
