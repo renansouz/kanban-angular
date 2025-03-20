@@ -13,6 +13,7 @@ Kanban Board Greystone is a project designed to provide a user-friendly, interac
 - **Renan Souza Silva**
 - **Victor Costa Nova**
 - **Gabriel Melo Galvao**
+- **Koffi Akirem Samuel**
 
 ## Features
 
