@@ -30,4 +30,3 @@ To run the project locally, follow these steps:
    ```bash
    git clone https://github.com/renansouz/kanban-ng.git
    ```
->>>>>>> 0aa875783f0ed783047d0a856090b5f81eb396df
