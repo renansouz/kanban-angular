@@ -1,4 +1,3 @@
-=======
 # Kanban Board Greystone
 
 Kanban Board Greystone is a project designed to provide a user-friendly, interactive Kanban board for task management. The app allows users to create, update, and manage tasks efficiently using a visually organized board with multiple columns for different task statuses.
