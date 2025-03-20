@@ -1,16 +1,24 @@
-<mat-toolbar class="toolbar-container">
-    @if (userInfo()) {
-        <span class="username title">Hello, {{ userInfo()?.displayName }}</span>
-    } @else {
-        <a class="title" [routerLink]="['/']">KanbanNG</a>
-    }
-    <span class="spacer"></span>
-    <div class="buttons">
-        @if (!userInfo()) {
-            <button mat-flat-button class="auth-button" [routerLink]="['/login']">Login</button>
-            <button mat-flat-button class="auth-button" [routerLink]="['/register']">Register</button>
+    <mat-toolbar class="toolbar-container">
+        @if (userInfo()) {
+            <button mat-icon-button (click)="drawer.toggle()" class="sidenav-button">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="toolbar-links">
+                <a [routerLink]="['/']">Home</a>
+                <a [routerLink]="['/dashboard']">Tasks</a>
+                <a [routerLink]="['/about']">About</a>
+            </div>    
         } @else {
-            <button mat-flat-button class="auth-button" (click)="logout()">Log out</button>
+            <a class="title" [routerLink]="['/']">KanbanNG</a>
         }
-    </div>
-</mat-toolbar>
+        <span class="spacer"></span>
+        <div class="buttons">
+            @if (!userInfo()) {
+                <button mat-flat-button class="auth-button" [routerLink]="['/login']">Login</button>
+                <button mat-flat-button class="auth-button" [routerLink]="['/register']">Register</button>
+            } @else {
+                <button mat-flat-button class="auth-button" (click)="logout()">Log out</button>
+            }
+        </div>
+    </mat-toolbar>
+

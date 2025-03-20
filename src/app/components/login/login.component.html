@@ -7,17 +7,17 @@
             <p>
                 <mat-form-field appearance="fill" class="login-input">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Type your email" type="email">
+                    <input matInput [(ngModel)]="email" placeholder="Type your email" type="email">
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="login-input">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="Type your password" type="password">
+                    <input matInput [(ngModel)]="password" placeholder="Type your password" type="password">
                 </mat-form-field>
             </p>
         </div>
         <div class="buttons-container">
             <div class="login-button-container">
-                <button mat-raised-button class="login-button">Login</button>
+                <button mat-raised-button class="login-button" (click)="loginWithEmailandPassword()">Login</button>
             </div>
             <div class="register-google-container">
                 <button mat-flat-button class="register-button" [routerLink]="['/register']">Register</button>

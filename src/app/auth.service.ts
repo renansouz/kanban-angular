@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider, signOut, User, onAuthStateChanged, EmailAuthProvider, linkWithCredential, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithPopup, GoogleAuthProvider, signOut, User, onAuthStateChanged, EmailAuthProvider, linkWithCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { DatabaseService } from './database.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,10 @@ export class AuthService {
   private provider = new GoogleAuthProvider();
   private dbService = inject(DatabaseService);
   private router = inject(Router);
+
+  async loginWithEmail(email: string, password: string): Promise<UserCredential> {
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
 
   async loginWithGoogle(): Promise<User | null> {
     try {

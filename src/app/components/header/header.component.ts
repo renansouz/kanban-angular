@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../auth.service';
@@ -6,12 +6,14 @@ import { User, Auth } from '@angular/fire/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, RouterLink, FormsModule],
+  imports: [MatToolbarModule, MatButtonModule, RouterLink, FormsModule, MatIconModule, MatSidenavModule, MatDrawer],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -22,6 +24,12 @@ export class HeaderComponent implements OnInit, OnDestroy{
   private router = inject(Router);
   userInfo = signal<User | null>(null);
   private unsubscribeAuthState: (() => void) | null = null;
+
+  @Input() drawer!: MatDrawer; // Receive the drawer reference
+
+  toggleDrawer() {
+    this.drawer.toggle();
+  }
 
   ngOnInit() {
       this.unsubscribeAuthState = onAuthStateChanged(this.auth, (user) => {

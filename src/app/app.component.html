@@ -1,2 +1,9 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<mat-drawer-container autosize >
+    <mat-drawer #drawer mode="over" [style.height]="'100vh'">
+        <p>test</p>
+    </mat-drawer>
+    <div class="main-content">
+        <app-header [drawer]="drawer"></app-header>
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>

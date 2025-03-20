@@ -19,3 +19,19 @@
 .auth-button:last-child {
     margin-right: 0; /* Remove margin from the last button */
 }
+
+.sidenav-button {
+    margin-right: 15px;
+    color: white;
+}
+
+.toolbar-links {
+    display: flex;
+    gap: 15px;
+}
+
+.toolbar-links a{
+    font-weight: 200;
+    color: white;
+    text-decoration: none;
+}
