@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,14 +21,14 @@ interface Column {
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatListModule,
     DragDropModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
@@ -38,10 +38,17 @@ export class DashboardComponent implements OnInit {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   tasksSubscription?: Subscription;
+  user = this.auth.currentUser;
 
-  taskTitle: string = '';
-  taskDescription: string = '';
+  taskForm: FormGroup;
 
+  constructor() {
+    // Initialize the FormGroup with taskTitle and taskDescription
+    this.taskForm = new FormGroup({
+      taskTitle: new FormControl('', [Validators.required]),  // Task title must be filled
+      taskDescription: new FormControl('', [Validators.required])  // Task description must be filled
+    });
+  }
   columns: Column[] = [
     { name: 'Ideas', tasks: [] },
     { name: 'In progress', tasks: [] },
@@ -53,33 +60,38 @@ export class DashboardComponent implements OnInit {
   }
 
   async addTask() {
-    const user = this.auth.currentUser;
-    if (!user) return alert('User not authenticated');
+    if (this.taskForm.valid) {
+      if (!this.user) return;
+      const taskTitle = this.taskForm.get('taskTitle')?.value;
+      const taskDescription = this.taskForm.get('taskDescription')?.value;
 
-    const newTask: Task = {
-      id: Math.random().toString(36).substr(2, 9), // Generate random ID
-      column: this.columns[0].name,
-      title: this.taskTitle,
-      description: this.taskDescription,
-      createdAt: new Date(),
-      userId: user.uid,
-    };
+      const newTask = {
+        id: Math.random().toString(36).substr(2, 9),  // Generate random ID
+        title: taskTitle,
+        description: taskDescription,
+        createdAt: new Date(),
+        userId: this.user.uid,  // Replace with actual user ID
+        column: this.columns[0].name
+      };
 
-    const tasksCollection = collection(this.firestore, 'tasks');
-    await addDoc(tasksCollection, newTask);
+      const tasksCollection = collection(this.firestore, 'tasks');
+      await addDoc(tasksCollection, newTask);
 
-    this.columns[0].tasks.push(newTask); // Add to "Ideas" column
+      // Add to the "Ideas" column in the frontend
+      this.columns[0].tasks.push(newTask);
 
-    this.taskTitle = '';
-    this.taskDescription = '';
+      console.log('New Task:', newTask);
+      this.taskForm.reset();
+    } else {
+      console.log('Please fill in both fields.');
+    }
   }
 
   async loadTasks() {
-    const user = this.auth.currentUser;
-    if (!user) return;
+    if (!this.user) return;
 
     const tasksCollection = collection(this.firestore, 'tasks');
-    const userTasksQuery = query(tasksCollection, where('userId', '==', user.uid));
+    const userTasksQuery = query(tasksCollection, where('userId', '==', this.user.uid));
 
     // Unsubscribe from previous subscription to prevent memory leaks
     if (this.tasksSubscription) {

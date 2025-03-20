@@ -20,7 +20,9 @@ export class LoginComponent {
   private router = inject(Router);
   user = signal<User | null>(null);
 
+  async loginWithEmailandPassword(): Promise<void> { //TODO
 
+  }
 
   async loginWithGoogle(): Promise<void> {
     try {

@@ -1,15 +1,23 @@
 <div class="task-form">
-  <mat-form-field appearance="fill">
-    <mat-label>Task Title</mat-label>
-    <input matInput [(ngModel)]="taskTitle">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Task Description</mat-label>
-    <input matInput [(ngModel)]="taskDescription">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="addTask()">Add Task</button>
+  <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+    <mat-form-field appearance="fill">
+      <mat-label>Task Title</mat-label>
+      <input matInput formControlName="taskTitle">
+      @if (taskForm.get('taskTitle')?.invalid && taskForm.get('taskTitle')?.touched) {
+        Task Title is required.
+      }
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Task Description</mat-label>
+      <input matInput formControlName="taskDescription">
+      @if (taskForm.get('taskDescription')?.invalid && taskForm.get('taskDescription')?.touched) {
+        Task Title is required.
+      }
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Add Task</button>
+  </form>
 </div>
 
 <div class="kanban-board" cdkDropListGroup>
@@ -22,7 +30,7 @@
       (cdkDropListDropped)="drop($event, column.name)"
       class="column"
       > 
-        <h3>{{ column.name }}</h3>
+        <h3 class="column-title">{{ column.name }}</h3>
         @for (task of column.tasks; track task) {
           <div
           cdkDrag
