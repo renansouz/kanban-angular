@@ -1,69 +1,75 @@
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .login-form {
-    max-width: 700px;
-    max-height: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background: rgb(2,0,36);
-    background: linear-gradient(150deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+  max-width: 700px;
+  max-height: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    150deg,
+    rgba(2, 0, 36, 1) 62%,
+    rgba(9, 9, 121, 1) 100%,
+    rgba(0, 14, 41, 1) 100%
+  );
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .input-fields {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .login-input {
-    width: 100%;
-    color: #fff;
+  width: 100%;
+  color: #fff;
 }
 
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-fill {
-    border-radius: 100px; /* Set your desired border radius */
+  border-radius: 100px; /* Set your desired border radius */
 }
 
 .buttons-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
 }
 
 .login-button {
-    width: 100%;
+  width: 100%;
 }
 
 .register-google-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.register-button, .login-with-google-button {
-    width: 45%;
-    padding: 10px;
-    display: flex;
+.register-button,
+.login-with-google-button {
+  width: 45%;
+  padding: 10px;
+  display: flex;
 }
 
 .forgot-password-link {
-    margin-top: 10px;
-    text-align: left;
-    font-size: 12px;
-    text-decoration: none;
-    color: #fff;
+  margin-top: 10px;
+  text-align: left;
+  font-size: 12px;
+  text-decoration: none;
+  color: #fff;
 }

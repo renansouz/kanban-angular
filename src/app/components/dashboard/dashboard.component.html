@@ -1,0 +1,56 @@
+<div class="root">
+  <div class="board">
+    <div class="board-bar">
+      <p class="board-name has-gradient-text">Task List</p>
+    </div>
+
+    <div class="task-form">
+      <mat-form-field>
+        <mat-label>Task Name</mat-label>
+        <input matInput [(ngModel)]="newTaskName" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Task Description</mat-label>
+        <input matInput [(ngModel)]="newTaskDescription" />
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" (click)="addTask()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="board-wrapper">
+      <div class="board-columns" cdkDropListGroup>
+        <div class="board-column" *ngFor="let column of board.columns">
+          <div class="column-title">{{ column.name }}</div>
+          <div
+            class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div
+              class="task"
+              *ngFor="let task of column.tasks; let i = index"
+              cdkDrag
+            >
+              <div class="task-content">
+                <p class="task-name">{{ task.name }}</p>
+                <p class="task-description">{{ task.description }}</p>
+              </div>
+
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteTask(column, i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
