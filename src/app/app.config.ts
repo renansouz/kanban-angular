@@ -29,12 +29,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: environment.projectId,
-        appId: environment.appId,
-        storageBucket: environment.storageBucket,
-        apiKey: environment.apiKey,
-        authDomain: environment.authDomain,
-        messagingSenderId: environment.messagingSenderId,
+        projectId: environment.firebaseConfig.projectId,
+        appId: environment.firebaseConfig.appId,
+        storageBucket: environment.firebaseConfig.storageBucket,
+        apiKey: environment.firebaseConfig.apiKey,
+        authDomain: environment.firebaseConfig.authDomain,
+        messagingSenderId: environment.firebaseConfig.messagingSenderId,
       })
     ),
     provideAuth(() => getAuth()),
