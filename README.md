@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 =======
 # Kanban Board Greystone
 
