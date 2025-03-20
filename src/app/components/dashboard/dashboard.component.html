@@ -1,56 +1,40 @@
-<div class="root">
-  <div class="board">
-    <div class="board-bar">
-      <p class="board-name has-gradient-text">Task List</p>
-    </div>
+<div class="task-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Task Title</mat-label>
+    <input matInput [(ngModel)]="taskTitle">
+  </mat-form-field>
 
-    <div class="task-form">
-      <mat-form-field>
-        <mat-label>Task Name</mat-label>
-        <input matInput [(ngModel)]="newTaskName" />
-      </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Task Description</mat-label>
+    <input matInput [(ngModel)]="taskDescription">
+  </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Task Description</mat-label>
-        <input matInput [(ngModel)]="newTaskDescription" />
-      </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addTask()">Add Task</button>
+</div>
 
-      <button mat-mini-fab color="primary" (click)="addTask()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-
-    <div class="board-wrapper">
-      <div class="board-columns" cdkDropListGroup>
-        <div class="board-column" *ngFor="let column of board.columns">
-          <div class="column-title">{{ column.name }}</div>
+<div class="kanban-board" cdkDropListGroup>
+  @for (column of columns; track column.name) {
+       
+      <!-- Ensure cdkDropList is bound correctly -->
+      <div
+      cdkDropList
+      [cdkDropListData]="column.tasks"
+      (cdkDropListDropped)="drop($event, column.name)"
+      class="column"
+      > 
+        <h3>{{ column.name }}</h3>
+        @for (task of column.tasks; track task) {
           <div
-            class="tasks-container"
-            cdkDropList
-            [cdkDropListData]="column.tasks"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <div
-              class="task"
-              *ngFor="let task of column.tasks; let i = index"
-              cdkDrag
-            >
-              <div class="task-content">
-                <p class="task-name">{{ task.name }}</p>
-                <p class="task-description">{{ task.description }}</p>
-              </div>
-
-              <button
-                mat-icon-button
-                color="warn"
-                (click)="deleteTask(column, i)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
+          cdkDrag
+          [cdkDragData]="task"
+          class="task-card"
+          [attr.data-id]="task.id"
+        >
+          <h4>{{ task.title }}</h4>
+          <p>{{ task.description }}</p>
+          <small>{{ task.createdAt | date:'short' }}</small>
         </div>
+        }      
       </div>
-    </div>
-  </div>
+  }
 </div>

@@ -1,0 +1,28 @@
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.column {
+  width: 300px;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.task-card {
+  background: white;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.task-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+}
