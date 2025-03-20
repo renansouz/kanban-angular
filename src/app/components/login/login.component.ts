@@ -25,8 +25,7 @@ export class LoginComponent {
   async loginWithGoogle(): Promise<void> {
     try {
       await this.authService.loginWithGoogle().then((user) => {
-        console.log('Logged in', user) // Logging for debugging purposes  
-        this.router.navigate(['/dashboard']);
+        console.log('Logged in', user) // Logging for debugging purposes
       }); 
     } catch (error) {
       console.error(error);

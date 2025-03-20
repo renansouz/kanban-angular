@@ -3,43 +3,47 @@
         <h2 class="register-title">Register to KanbanNG</h2>
     </div>
     <div class="register-form">
-        <div class="input-fields">
-            <p>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Type your name" type="text">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Last name</mat-label>
-                    <input matInput placeholder="Type your last name" type="text">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Type your email" type="email">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Confirm</mat-label>
-                    <input matInput placeholder="Confirm your email" type="email">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Password</mat-label>
-                    <input matInput placeholder="Type your password" type="password">
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="register-input">
-                    <mat-label>Confirm password</mat-label>
-                    <input matInput placeholder="Confirm your password" type="password">
-                </mat-form-field>
-            </p>
+        <form (ngSubmit)="register()">
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Type your name" [formControl]="nameControl">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Type your last name" [formControl]="lastNameControl">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Type your email" [formControl]="emailControl">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Confirm Email</mat-label>
+                <input matInput placeholder="Confirm your email" [formControl]="confirmEmailControl">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Type your password" type="password" [formControl]="passwordControl">
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="register-input">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput placeholder="Confirm your password" type="password" [formControl]="confirmPasswordControl">
+            </mat-form-field>
+        
+            <button mat-raised-button class="register-confirm-button" type="submit">
+                Register
+            </button>
+        </form>        
+
+        <div class="forgot-google-container">
+            <button mat-flat-button class="register-with-google" (click)="registerWithGoogle()">
+                Register with Google
+            </button>
+            <a [routerLink]="['/']" class="forgot-password-link">Forgot password?</a>
         </div>
-        <div class="buttons-container">
-            <div class="register-button-container">
-                <button mat-raised-button class="register-confirm-button">Register</button>
-            </div>
-            <div class="forgot-google-container">
-                <button mat-flat-button class="register-with-google" (click)="registerWithGoogle()">Register with Google</button>
-                <a [routerLink]="['/']" class="forgot-password-link">Forgot password?</a>
-            </div>
-        </div>       
     </div>
 </div>
-

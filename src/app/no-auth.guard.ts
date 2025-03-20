@@ -1,22 +1,22 @@
 import { inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { CanActivateFn, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const noAuthGuard: CanActivateFn = (route, state) => {
   const auth = inject(Auth);
   const router = inject(Router);
 
   return new Observable<boolean>((subscriber) => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        subscriber.next(true); 
-      } else {
+        router.navigate(['/dashboard']); // Redirect logged-in users to dashboard
         subscriber.next(false);
-        router.navigate(['/login']); 
+      } else {
+        subscriber.next(true); // Allow access if NOT logged in
       }
-      subscriber.complete(); 
+      subscriber.complete();
     });
-  }).pipe(take(1)); 
+  }).pipe(take(1));
 };
