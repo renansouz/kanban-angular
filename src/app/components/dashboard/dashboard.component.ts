@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc, query, where, DocumentData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, updateDoc, query, where, DocumentData, deleteDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { Subscription } from 'rxjs';
@@ -84,6 +84,20 @@ export class DashboardComponent implements OnInit {
       this.taskForm.reset();
     } else {
       console.log('Please fill in both fields.');
+    }
+  }
+
+  async deleteTask(task: Task, columnName: string) {
+    if (!this.user) return;
+  
+    // Remove from Firestore
+    const taskRef = doc(this.firestore, 'tasks', task.id);
+    await deleteDoc(taskRef);
+  
+    // Remove from the local UI
+    const column = this.columns.find(col => col.name === columnName);
+    if (column) {
+      column.tasks = column.tasks.filter(t => t.id !== task.id);
     }
   }
 

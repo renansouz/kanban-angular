@@ -38,9 +38,16 @@
           class="task-card"
           [attr.data-id]="task.id"
         >
-          <h4>{{ task.title }}</h4>
-          <p>{{ task.description }}</p>
-          <small>{{ task.createdAt | date:'short' }}</small>
+          <div class="task-content">
+            <div class="task-text">
+              <h4>{{ task.title }}</h4>
+              <p>{{ task.description }}</p>
+              <small>{{ task.createdAt | date:'short' }}</small>
+            </div>
+            <button mat-icon-button class="delete-btn" (click)="deleteTask(task, column.name)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
         }      
       </div>

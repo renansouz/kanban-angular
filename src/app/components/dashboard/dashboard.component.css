@@ -15,7 +15,6 @@
   width: 300px;
   background: linear-gradient(200deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
   padding: 10px;
-  box-shadow: 0 0 0 10px linear-gradient(150deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
   border-radius: 8px;
 }
 
@@ -32,6 +31,17 @@
   cursor: grab;
   width: 80%;
   margin: 10px auto;
+}
+
+.task-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.task-text {
+  flex: 1;
 }
 
 .cdk-drag-preview {
