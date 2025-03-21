@@ -1,7 +1,12 @@
 .task-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 50px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.task-form button {
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 .kanban-board {
@@ -13,12 +18,27 @@
 
 .column {
   width: 300px;
-  background: linear-gradient(200deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
+  background: linear-gradient(
+    200deg,
+    rgba(2, 0, 36, 1) 62%,
+    rgba(9, 9, 121, 1) 100%,
+    rgba(0, 14, 41, 1) 100%
+  );
   padding: 10px;
-  box-shadow: 0 0 0 10px linear-gradient(150deg, rgba(2,0,36,1) 62%, rgba(9,9,121,1) 100%, rgba(0,14,41,1) 100%);
+  box-shadow: 0 0 0 10px
+    linear-gradient(
+      150deg,
+      rgba(2, 0, 36, 1) 62%,
+      rgba(9, 9, 121, 1) 100%,
+      rgba(0, 14, 41, 1) 100%
+    );
   border-radius: 8px;
 }
 
+mat-form-field {
+  width: 300px;
+  margin-left: 10px;
+}
 .column-title {
   color: white;
   font-weight: 400;
@@ -34,12 +54,15 @@
   margin: 10px auto;
 }
 
+.task-title {
+  text-transform: capitalize;
+}
+
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
