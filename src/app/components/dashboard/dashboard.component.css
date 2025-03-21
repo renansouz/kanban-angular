@@ -25,6 +25,7 @@
 }
 
 .task-card {
+  display: flex;
   background: white;
   padding: 10px;
   border-radius: 5px;
@@ -38,6 +39,17 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
+}
+
+.delete-button {
+  align-self: flex-end; /* Stick the button to the bottom */
+  margin-top: auto; /* Push the button to the bottom */
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .task-text {
