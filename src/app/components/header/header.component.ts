@@ -13,7 +13,7 @@ import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, RouterLink, FormsModule, MatIconModule, MatSidenavModule, MatDrawer],
+  imports: [MatToolbarModule, MatButtonModule, RouterLink, FormsModule, MatIconModule, MatSidenavModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
