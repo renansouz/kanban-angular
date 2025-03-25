@@ -1,8 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -13,11 +18,17 @@ import { AuthService } from './auth.service';
     CommonModule,
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    SidenavComponent,
   ],
   templateUrl: './app.component.html',
-  styles: [],
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
+  collapsed = signal(false);
+  sidenavWidth = computed(() => (this.collapsed() ? '65px' : '250px'));
+
   authService = inject(AuthService);
 
   ngOnInit(): void {

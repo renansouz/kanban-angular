@@ -1,15 +1,36 @@
-<mat-toolbar color="primary" class="flex justify-between">
-  <div><mat-icon>local_fire_department</mat-icon></div>
+<mat-toolbar class="flex justify-between shadow-lg">
+  <div class="flex items-center gap-1">
+    <button mat-icon-button (click)="collapsed.set(!collapsed())">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-icon>local_fire_department</mat-icon>
+    <img
+      class="w-14"
+      src="https://cdn.freebiesupply.com/logos/large/2x/ace-3-logo-png-transparent.png"
+      alt="logo"
+    />
+  </div>
   @if (authService.currentUserSig() === null) {
   <div class="flex gap-4 right-0">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
+    <a class="text-sm" routerLink="/login">Login</a>
+    <a class="text-sm" routerLink="/register">Register</a>
   </div>
   } @if (authService.currentUserSig()) {
   <div>
-    {{ authService.currentUserSig()?.username }}
-    <span (click)="logout()">Logout</span>
+    <span class="text-sm" (click)="logout()">Logout</span>
   </div>
   }
 </mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav
+    opened
+    mode="side"
+    [style.width]="sidenavWidth()"
+    class="bg-white! border-l! border-slate-200! rounded-none!"
+  >
+    <app-sidenav [collapsed]="!collapsed()" />
+  </mat-sidenav>
+  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
