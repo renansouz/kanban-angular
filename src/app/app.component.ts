@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
     this.authService.user$.subscribe((user) => {
       if (user) {
         this.authService.currentUserSig.set({
+          uid: user.uid,
           email: user.email!,
           username: user.displayName!,
         });
@@ -44,6 +45,8 @@ export class AppComponent implements OnInit {
     });
   }
   logout(): void {
-    this.authService.logout();
+    this.authService.logout().subscribe(() => {
+      window.location.reload();
+    });
   }
 }

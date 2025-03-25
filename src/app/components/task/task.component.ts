@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   CdkDrag,
@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Task, TodoService } from '../../services/todo.service';
 
 @Component({
   selector: 'app-task',
@@ -32,35 +33,43 @@ import { MatDialogModule } from '@angular/material/dialog';
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
-export class TaskComponent {
-  constructor(public dialog: MatDialog) {}
+export class TaskComponent implements OnInit {
+  constructor(public dialog: MatDialog, private todoService: TodoService) {}
+  backlog: Task[] = [];
+  inProgress: Task[] = [];
+  done: Task[] = [];
+
+  ngOnInit() {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    this.todoService.getTasks().subscribe((tasks) => {
+      this.backlog = tasks.filter((task) => task.status === 'backlog');
+      this.inProgress = tasks.filter((task) => task.status === 'inProgress');
+      this.done = tasks.filter((task) => task.status === 'done');
+    });
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
       width: '250px',
-      data: {
-        taskTitle: this.taskTitle,
-        taskDescription: this.taskDescription,
-      },
+      data: { taskTitle: '', taskDescription: '' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.taskTitle = result.taskTitle;
-        this.taskDescription = result.taskDescription;
-        this.addTask();
+        const newTask: Task = {
+          title: result.taskTitle,
+          description: result.taskDescription,
+          status: 'backlog',
+        };
+        this.todoService.addTask(newTask);
       }
     });
   }
 
-  backlog: { title: string; description: string }[] = [];
-  inProgress: { title: string; description: string }[] = [];
-  done: { title: string; description: string }[] = [];
-
-  taskTitle: string = '';
-  taskDescription: string = '';
-
-  drop(event: CdkDragDrop<{ title: string; description: string }[]>) {
+  drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -68,41 +77,25 @@ export class TaskComponent {
         event.currentIndex
       );
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      const task = event.previousContainer.data[event.previousIndex];
+      const newStatus = event.container.id as 'backlog' | 'inProgress' | 'done';
+
+      if (task.id) {
+        this.todoService.updateTask(task.id, { status: newStatus }).then(() => {
+          transferArrayItem(
+            event.previousContainer.data,
+            event.container.data,
+            event.previousIndex,
+            event.currentIndex
+          );
+        });
+      }
     }
   }
 
-  addTask() {
-    if (this.taskTitle && this.taskDescription) {
-      this.backlog.push({
-        title: this.taskTitle,
-        description: this.taskDescription,
-      });
-      this.taskTitle = '';
-      this.taskDescription = '';
-    }
-  }
-  deleteTask(list: string, task: { title: string; description: string }) {
-    if (list === 'backlog') {
-      const index = this.backlog.indexOf(task);
-      if (index > -1) {
-        this.backlog.splice(index, 1);
-      }
-    } else if (list === 'inProgress') {
-      const index = this.inProgress.indexOf(task);
-      if (index > -1) {
-        this.inProgress.splice(index, 1);
-      }
-    } else if (list === 'done') {
-      const index = this.done.indexOf(task);
-      if (index > -1) {
-        this.done.splice(index, 1);
-      }
+  deleteTask(list: 'backlog' | 'inProgress' | 'done', task: Task) {
+    if (task.id) {
+      this.todoService.deleteTask(task.id);
     }
   }
 }

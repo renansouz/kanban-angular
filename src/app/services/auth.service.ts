@@ -8,7 +8,7 @@ import {
   user,
 } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
-import { UserInterface } from './user.interface';
+import { UserInterface } from '../user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,20 @@ export class AuthService {
   firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
   currentUserSig = signal<UserInterface | null | undefined>(undefined);
+
+  constructor() {
+    this.user$.subscribe((user) => {
+      if (user) {
+        this.currentUserSig.set({
+          uid: user.uid,
+          email: user.email!,
+          username: user.displayName!,
+        });
+      } else {
+        this.currentUserSig.set(null);
+      }
+    });
+  }
 
   register(
     email: string,
