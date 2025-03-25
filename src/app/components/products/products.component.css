@@ -1,0 +1,21 @@
+.body {
+    height: 100vh;
+}
+
+.order-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-button {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}

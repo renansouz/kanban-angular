@@ -1,9 +1,24 @@
-<mat-drawer-container autosize >
-    <mat-drawer #drawer mode="over" [style.height]="'100vh'">
-        <p>test</p>
-    </mat-drawer>
-    <div class="main-content">
-        <app-header [drawer]="drawer"></app-header>
-        <router-outlet></router-outlet>
-    </div>
-</mat-drawer-container>
+<div class="body">
+    <mat-drawer-container autosize >
+        <mat-drawer #drawer mode="over">
+            <div class="sidebar-group">
+                <button mat-fab extended [routerLink]="['/home']">
+                    <mat-icon fontIcon="home"></mat-icon>
+                    <span>Home</span>
+                </button>
+                <button mat-fab extended [routerLink]="['/invoices']">
+                    <mat-icon fontIcon="assignment_ind"></mat-icon>
+                    <span>Invoices</span>
+                </button>
+                <button mat-fab extended [routerLink]="['/products']">
+                    <mat-icon fontIcon="account_balance"></mat-icon>
+                    <span>Products</span>
+                </button>
+            </div>
+        </mat-drawer>
+        <div class="main-content">
+            <app-header [drawer]="drawer"></app-header>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
+</div>

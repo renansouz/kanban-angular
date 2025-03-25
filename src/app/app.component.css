@@ -1,0 +1,24 @@
+.body {
+    height: 100vh;
+}
+
+mat-drawer {
+    box-shadow: 0 0 50px #000;
+    border-radius: 0;
+    width: 250px;
+}
+
+.sidebar-group {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+}
+
+.sidebar-group button {
+    display: flex;
+    width: 80%;
+    background-color:rgb(255, 255, 255);
+    color: #000;
+}

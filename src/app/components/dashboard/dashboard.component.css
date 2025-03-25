@@ -1,3 +1,7 @@
+.body {
+  height: 100vh;
+}
+
 .task-form {
   display: grid;
   grid-template-columns: 1fr;

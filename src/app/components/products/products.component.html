@@ -1,0 +1,42 @@
+<div class="body">
+    <div class="order-body">
+        <div class="title">
+            <h3>Make your order</h3>
+        </div>
+        <div class="order-form">
+            <div class="hot-coffee">
+                <p>Hot or cold?</p>
+                <mat-radio-group [(ngModel)]="hotCoffee" aria-label="Hot or Cold">
+                    <mat-radio-button [value]="true">Hot</mat-radio-button>
+                    <mat-radio-button [value]="false">Cold</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="milk-count">
+                <div class="milk-control">
+                    <label for="milk-count">Milk: </label>
+                    <button color="primary" (click)="decrementMilk()">-</button>
+                    <input type="text" [(ngModel)]="milkCount" />
+                    <button color="primary" (click)="incrementMilk()">+</button>
+                </div>
+            </div>
+            <div class="syrup-count">
+                <div class="syrup-control">
+                    <label for="syrup-count">Syrup: </label>
+                    <button color="primary" (click)="decrementSyrup()">-</button>
+                    <input type="text" [(ngModel)]="syrupCount" />
+                    <button color="primary" (click)="incrementSyrup()">+</button>
+                </div>
+            </div>
+            <div class="with-caffeine">
+                <p>Caffeine?</p>
+                <mat-radio-group [(ngModel)]="caffeine" aria-label="Caffeine">
+                    <mat-radio-button [value]="true">Yes</mat-radio-button>
+                    <mat-radio-button [value]="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div class="submit-button">
+                <button mat-raised-button color="primary" (click)="orderCoffee()">Order!</button>
+            </div>
+        </div>
+    </div>
+</div>
