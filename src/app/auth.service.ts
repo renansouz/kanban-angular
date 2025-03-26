@@ -1,7 +1,18 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider, signOut, User, onAuthStateChanged, EmailAuthProvider, linkWithCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential
+import { 
+  Auth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  signOut, 
+  User, 
+  onAuthStateChanged, 
+  EmailAuthProvider, 
+  linkWithCredential, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  UserCredential
   
- } from '@angular/fire/auth';
+} from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { DatabaseService } from './database.service';
 import { Router } from '@angular/router';

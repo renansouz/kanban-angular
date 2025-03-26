@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
         column: this.columns[0].name
       };
 
-      const tasksCollection = collection(this.firestore, 'tasks');
+      const tasksCollection = collection(this.firestore, `users/${this.user.uid}/tasks`);
       await addDoc(tasksCollection, newTask);
 
       // Add to the "Ideas" column in the frontend
@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
     if (!this.user) return;
   
     // Remove from Firestore
-    const taskRef = doc(this.firestore, 'tasks', task.id);
+    const taskRef = doc(this.firestore, `users/${this.user.uid}/tasks`, task.id);
     await deleteDoc(taskRef);
   
     // Remove from the local UI
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
   async loadTasks() {
     if (!this.user) return;
 
-    const tasksCollection = collection(this.firestore, 'tasks');
+    const tasksCollection = collection(this.firestore, `users/${this.user.uid}/tasks`);
     const userTasksQuery = query(tasksCollection, where('userId', '==', this.user.uid));
 
     // Unsubscribe from previous subscription to prevent memory leaks
@@ -151,7 +151,8 @@ export class DashboardComponent implements OnInit {
       );
 
       // Update the task's column in Firestore
-      const taskRef = doc(this.firestore, 'tasks', task.id);
+      if (!this.user) return;
+      const taskRef = doc(this.firestore, `users/${this.user.uid}/tasks`, task.id);
       await updateDoc(taskRef, { column: columnName });
     }
 
