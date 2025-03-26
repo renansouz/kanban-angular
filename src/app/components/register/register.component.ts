@@ -7,9 +7,11 @@ import { AuthService } from '../../services/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
