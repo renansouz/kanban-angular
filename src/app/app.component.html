@@ -1,13 +1,13 @@
-<mat-toolbar class="flex justify-between shadow-lg">
+<mat-toolbar class="flex justify-between shadow-lg bg-blue-600! text-slate-50!">
   <div class="flex items-center gap-1">
     @if (authService.currentUserSig()) {
     <button mat-icon-button (click)="collapsed.set(!collapsed())">
-      <mat-icon>menu</mat-icon>
+      <mat-icon class="text-slate-50!">menu</mat-icon>
     </button>
     }
-    <mat-icon>local_fire_department</mat-icon>
+    <mat-icon class="text-slate-50!">local_fire_department</mat-icon>
     <img
-      class="w-14"
+      class="w-14 invert"
       src="https://cdn.freebiesupply.com/logos/large/2x/ace-3-logo-png-transparent.png"
       alt="logo"
     />
@@ -29,11 +29,14 @@
     opened
     mode="side"
     [style.width]="sidenavWidth()"
-    class="bg-white! border-l! border-slate-200! rounded-none! overflow-x-hidden!"
+    class="bg-slate-50! border-l! border-slate-200! rounded-none! overflow-x-hidden!"
   >
     <app-sidenav [collapsed]="!collapsed()" />
   </mat-sidenav>
-  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+  <mat-sidenav-content
+    class="content bg-slate-200"
+    [style.margin-left]="sidenavWidth()"
+  >
     <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>

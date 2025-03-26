@@ -1,6 +1,6 @@
 <div class="flex m-10 gap-2 items-center">
   <button
-    class="mb-4 bg-white!"
+    class="mb-4 bg-slate-50!"
     mat-raised-button
     color="primary"
     (click)="openDialog()"
@@ -18,7 +18,7 @@
       cdkDropList
       id="backlog"
       [cdkDropListData]="backlog"
-      class="example-list"
+      class="example-list bg-slate-50"
       (cdkDropListDropped)="drop($event)"
     >
       @if (backlog.length <= 0) {
@@ -48,7 +48,7 @@
       cdkDropList
       id="inProgress"
       [cdkDropListData]="inProgress"
-      class="example-list"
+      class="example-list bg-slate-50"
       (cdkDropListDropped)="drop($event)"
     >
       @if (inProgress.length <= 0) {
@@ -78,7 +78,7 @@
       cdkDropList
       id="done"
       [cdkDropListData]="done"
-      class="example-list"
+      class="example-list bg-slate-50"
       (cdkDropListDropped)="drop($event)"
     >
       @if (done.length <= 0) {
