@@ -105,7 +105,6 @@ export class DashboardComponent implements OnInit {
     if (!this.user) return;
 
     const tasksCollection = collection(this.firestore, `users/${this.user.uid}/tasks`);
-    const userTasksQuery = query(tasksCollection, where('userId', '==', this.user.uid));
 
     // Unsubscribe from previous subscription to prevent memory leaks
     if (this.tasksSubscription) {
@@ -113,7 +112,7 @@ export class DashboardComponent implements OnInit {
     }
 
     // Fetch tasks that belong to the current user
-    this.tasksSubscription = collectionData(userTasksQuery, { idField: 'id' }).subscribe((tasks: DocumentData[]) => {
+    this.tasksSubscription = collectionData(tasksCollection, { idField: 'id' }).subscribe((tasks: DocumentData[]) => {
       this.columns.forEach((column) => (column.tasks = [])); // Clear columns
 
       // Map the raw data (DocumentData) to Task type

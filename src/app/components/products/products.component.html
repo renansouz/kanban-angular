@@ -30,7 +30,7 @@
             <div class="syrup-count">
                 <div class="syrup-control">
                     <label for="syrup-count">Syrup: </label>
-                    @if (this.milkCount < 1) {
+                    @if (this.syrupCount < 1) {
                         <button color="primary" (click)="decrementSyrup()" (click)="updatePrice()" disabled>-</button>
                     } @else {
                         <button color="primary" (click)="decrementSyrup()" (click)="updatePrice()">-</button>

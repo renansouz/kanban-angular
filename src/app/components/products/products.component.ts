@@ -15,8 +15,8 @@ import { DatabaseService } from '../../database.service';
 })
 export class ProductsComponent {
   user: User | null = null;
-  coffeePrice: number = 2.0;
   private userSubscription!: Subscription;
+  coffeePrice: number = 2.0;
   gst: number = 5.0;
   pst: number = 7.0;
   milkPrice: number = 0.8;
