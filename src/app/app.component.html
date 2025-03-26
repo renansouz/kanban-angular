@@ -1,8 +1,10 @@
 <mat-toolbar class="flex justify-between shadow-lg">
   <div class="flex items-center gap-1">
+    @if (authService.currentUserSig()) {
     <button mat-icon-button (click)="collapsed.set(!collapsed())">
       <mat-icon>menu</mat-icon>
     </button>
+    }
     <mat-icon>local_fire_department</mat-icon>
     <img
       class="w-14"
@@ -21,12 +23,13 @@
   </div>
   }
 </mat-toolbar>
+@if (authService.currentUserSig()) {
 <mat-sidenav-container>
   <mat-sidenav
     opened
     mode="side"
     [style.width]="sidenavWidth()"
-    class="bg-white! border-l! border-slate-200! rounded-none!"
+    class="bg-white! border-l! border-slate-200! rounded-none! overflow-x-hidden!"
   >
     <app-sidenav [collapsed]="!collapsed()" />
   </mat-sidenav>
@@ -34,3 +37,6 @@
     <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>
+} @if (authService.currentUserSig() === null) {
+<router-outlet />
+}

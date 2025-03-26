@@ -26,7 +26,7 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  collapsed = signal(false);
+  collapsed = signal(true);
   sidenavWidth = computed(() => (this.collapsed() ? '65px' : '250px'));
 
   authService = inject(AuthService);
