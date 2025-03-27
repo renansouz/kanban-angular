@@ -9,4 +9,5 @@ export interface invoice {
     syrupCount: number;
     tax: number;
     total: number;
+    orderNumber: number;
 }

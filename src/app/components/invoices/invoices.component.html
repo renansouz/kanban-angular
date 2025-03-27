@@ -1,6 +1,36 @@
 <div class="body">
-    <div class="orders-list">
-        
-    </div>
+    @if (ordersLoaded) {
+        <div class="orders-list-container" @fadeIn>
+            <div class="title-container">
+                <h1 class="title">Your orders</h1>
+            </div>
+                <div class="orders-list">
+                    @for (order of orders; track $index) {
+                        <div class="order-container">
+                            <div class="order-details">
+                                <span>Order nº: <span><strong>{{order.orderNumber}}</strong></span></span>
+                                <span>Date ordered: <span><strong>{{ order.date | date:'short' }}</strong></span></span>
+                                @if (order.hot) {
+                                    <span>Product: <strong>Hot Coffee</strong></span>
+                                } @else {
+                                    <span>Product: <strong>Ice Coffee</strong></span>
+                                }
+                                <div class="order-values">
+                                    <span>Subtotal: ${{order.subTotal}}</span>
+                                    @if (order.discount > 0) {
+                                        <span>Discount: <span style="color: green;">-${{order.discount}}</span></span>
+                                    }
+                                    <span>Tax: ${{order.tax}}</span>
+                                    <span>Total: ${{order.total}}</span>
+                                </div>
+                            </div>
+                            <div class="pdf-button">
+                                <button mat-icon-button matTooltip="Generate invoice PDF" (click)="generatePdf(order)"><mat-icon>get_app</mat-icon></button>
+                            </div>
+                        </div>
+                    }
+                </div>
+        </div>
+    } 
 </div>
 

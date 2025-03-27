@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Firestore, doc, setDoc, getDoc, updateDoc, addDoc } from '@angular/fire/firestore';
-import { collection } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +45,9 @@ export class DatabaseService {
   
   // Used for invoices page
   async getOrders(userUid: string): Promise<any | null> {
-    const ordersRef = doc(this.firestore, `users/${userUid}/orders`);
-    const ordersDoc = await getDoc(ordersRef);
+    const ordersRef = collection(this.firestore, `users/${userUid}/orders`);
+    const ordersDoc = await getDocs(ordersRef);
 
-    return ordersDoc.exists() ? ordersDoc.data() : null;
+    return ordersDoc.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 }

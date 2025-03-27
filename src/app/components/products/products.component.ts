@@ -16,6 +16,9 @@ import { DatabaseService } from '../../database.service';
 export class ProductsComponent {
   user: User | null = null;
   private userSubscription!: Subscription;
+  auth = inject(AuthService);
+  db = inject(DatabaseService);
+  
   coffeePrice: number = 2.0;
   gst: number = 5.0;
   pst: number = 7.0;
@@ -30,8 +33,7 @@ export class ProductsComponent {
   subTotal: number = 2.0;
   tax: number = 0.0;
   total: number = 0.0;
-  auth = inject(AuthService);
-  db = inject(DatabaseService);
+  
 
 
   ngOnInit() {
@@ -104,7 +106,8 @@ export class ProductsComponent {
           subTotal: this.subTotal,
           total: this.total,
           tax: this.tax,
-          date: Date.now()
+          date: Date.now(),
+          orderNumber: this.generateOrderNumber()
         }
         const orderId = await this.db.saveOrder(this.user.uid, orderData);
         alert(orderId + '\n Order placed' +
@@ -118,4 +121,14 @@ export class ProductsComponent {
       alert('Error placing order: ' + error);
     }
   }
+
+  generateOrderNumber(): number {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 2-digit month
+    const day = now.getDate().toString().padStart(2, '0'); // 2-digit day
+    const randomNum = Math.floor(1000 + Math.random() * 9000); // 4-digit random number
+    return parseInt(`${year}${month}${day}${randomNum}`);
+  }
+  
 }

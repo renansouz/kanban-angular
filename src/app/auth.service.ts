@@ -13,7 +13,7 @@ import {
   UserCredential
   
 } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { DatabaseService } from './database.service';
 import { Router } from '@angular/router';
 
@@ -25,6 +25,13 @@ export class AuthService {
   private provider = new GoogleAuthProvider();
   private dbService = inject(DatabaseService);
   private router = inject(Router);
+  private userSubject = new BehaviorSubject<User | null>(null)
+
+  constructor() {
+    onAuthStateChanged(this.auth, (user) => {
+      this.userSubject.next(user); // Always update the BehaviorSubject when auth state changes
+    });
+  }
 
   async loginWithEmail(email: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(this.auth, email, password);
@@ -103,12 +110,6 @@ export class AuthService {
   }
 
   getCurrentUser(): Observable<User | null> {
-    return new Observable(subscriber => {
-      const unsubscribe = onAuthStateChanged(this.auth, user => {
-        subscriber.next(user);
-      });
-
-      return () => unsubscribe(); // Unsubscribe on cleanup
-    });
+    return this.userSubject.asObservable(); // Always return the latest user state
   }
 }
