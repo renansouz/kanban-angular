@@ -40,14 +40,14 @@ export class SidenavComponent {
       route: 'task',
     },
     {
+      icon: 'add_shopping_cart',
+      label: 'product',
+      route: 'product',
+    },
+    {
       icon: 'description',
       label: 'invoices',
       route: 'invoices',
-    },
-    {
-      icon: 'add_shopping_cart',
-      label: 'Add product',
-      route: 'product',
     },
   ]);
 
