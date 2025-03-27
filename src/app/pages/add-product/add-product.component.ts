@@ -57,7 +57,6 @@ export class AddProductComponent implements OnInit {
     this.updateSummary();
   }
 
-  // HOT increments/decrements
   incrementHot(type: string) {
     if (type === 'milk') this.milkHot++;
     if (type === 'syrup') this.syrupHot++;
@@ -72,7 +71,6 @@ export class AddProductComponent implements OnInit {
     this.updateSummary();
   }
 
-  // COLD increments/decrements
   incrementCold(type: string) {
     if (type === 'milk') this.milkCold++;
     if (type === 'syrup') this.syrupCold++;
@@ -88,7 +86,6 @@ export class AddProductComponent implements OnInit {
   }
 
   applyDiscount(code: string) {
-    // Only allow discount if there is at least some subtotal
     if (code === 'ABC' && this.subTotal > 0) {
       this.discount = 5;
       this.discountApplied = true;
