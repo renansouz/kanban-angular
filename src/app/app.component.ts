@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule, MatFabButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,5 +15,23 @@ import { MatButtonModule, MatFabButton } from '@angular/material/button';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  @ViewChild('drawer') drawer!: MatDrawer;
 
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Close drawer when route changes (including browser back/forward)
+    this.router.events.subscribe(() => {
+      if (this.drawer) {
+        this.drawer.close();
+      }
+    });
+  }
+
+  // Method to handle manual button clicks
+  closeDrawerOnNavigation() {
+    if (this.drawer) {
+      this.drawer.close();
+    }
+  }
 }
