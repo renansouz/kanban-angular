@@ -1,0 +1,31 @@
+<div class="pt-6 text-center">
+  <img
+    class="rounded-full object-cover mb-2.5 mx-auto"
+    [width]="profilePicSize()"
+    [height]="profilePicSize()"
+    src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+  />
+  <div class="h-12" [class.hide-header-text]="!sideNavCollapsed()">
+    <h2 class="m-0! text-base leading-6">Your Account</h2>
+    <p class="m-0 text-sm">{{ authService.currentUserSig()?.username }}</p>
+  </div>
+</div>
+<mat-nav-list>
+  <a
+    mat-list-item
+    class="border-l-4 border-transparent rounded-none!"
+    *ngFor="let item of menuItems()"
+    [routerLink]="item.route"
+    routerLinkActive="selected-menu-item"
+    #rla="routerLinkActive"
+    [activated]="rla.isActive"
+  >
+    <mat-icon
+      matListItemIcon
+      [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'"
+    >
+      {{ item.icon }}
+    </mat-icon>
+    <span matListItemTitle *ngIf="sideNavCollapsed()">{{ item.label }} </span>
+  </a>
+</mat-nav-list>

@@ -1,0 +1,50 @@
+<div class="flex justify-center items-center -ml-16 mt-12">
+  <div class="border-slate-200 border p-12 shadow-2xl">
+    <h1 class="text-lg font-medium mb-4">Register</h1>
+
+    <p class="my-4 text-base font-light text-slate-950">
+      Already have an account?
+      <a class="hover:underline" routerLink="/login">Sign in</a>
+    </p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col">
+      <mat-form-field class="w-64" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          required
+          matInput
+          type="text"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field apperance="fill">
+        <mat-label>E-mail</mat-label>
+        <input
+          required
+          matInput
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input
+          required
+          matInput
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <button mat-button class="bg-blue-400! text-white!" type="submit">
+        Sign Up
+      </button>
+    </form>
+    @if (errorMessage) {
+    <p class="text-red-500 text-center mt-4 break-words max-w-60">
+      {{ errorMessage }}
+    </p>
+    }
+  </div>
+</div>

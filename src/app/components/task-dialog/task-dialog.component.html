@@ -1,0 +1,36 @@
+<form [formGroup]="taskForm">
+  <h1 mat-dialog-title>Add Task</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" class="mb-2">
+      <mat-label>Title</mat-label>
+      <input
+        required
+        formControlName="taskTitle"
+        matInput
+        placeholder="Title"
+      />
+      <mat-error *ngIf="taskForm.get('taskTitle')?.invalid"
+        >Title is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input
+        required
+        formControlName="taskDescription"
+        matInput
+        placeholder="Description"
+      />
+
+      <mat-error *ngIf="taskForm.get('taskDescription')?.invalid"
+        >Description is required</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onOk()">Ok</button>
+  </div>
+</form>

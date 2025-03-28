@@ -1,0 +1,5 @@
+# pack-refs with: peeled fully-peeled sorted 
+208a3e8610145fe4bc19321b736e27e7aa80adec refs/remotes/origin/gabrielbranch
+0d02731611a578acce59e00541469b1d56f91480 refs/remotes/origin/main
+a0cb3488b923da1ab1026e7dd4dff5c42373224a refs/remotes/origin/renanbranch
+ec3801c3fcb86d5a161726b0215ba9dea6cb671c refs/remotes/origin/victorbranch
