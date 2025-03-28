@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { InvoicesComponent } from './pages/invoices/invoices.component';
 import { AddProductComponent } from './pages/add-product/add-product.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -28,6 +29,11 @@ export const routes: Routes = [
   {
     path: 'product',
     component: AddProductComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'about',
+    component: AboutUsComponent,
     canActivate: [AuthGuard],
   },
   {

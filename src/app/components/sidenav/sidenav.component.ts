@@ -49,6 +49,11 @@ export class SidenavComponent {
       label: 'invoices',
       route: 'invoices',
     },
+    {
+      icon: 'group',
+      label: 'about us',
+      route: 'about',
+    },
   ]);
 
   profilePicSize = computed(() => (!this.sideNavCollapsed() ? '32' : '100'));
