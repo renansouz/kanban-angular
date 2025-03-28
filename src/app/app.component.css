@@ -3,7 +3,6 @@
 }
 
 mat-drawer {
-    box-shadow: 0 0 50px #000;
     border-radius: 0;
     width: 250px;
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet, Router } from '@angular/router';
+import { RouterLink, RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,18 +20,21 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Close drawer when route changes (including browser back/forward)
-    this.router.events.subscribe(() => {
-      if (this.drawer) {
-        this.drawer.close();
+    // Close drawer when route changes (only when navigation ends)
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.drawer) {
+          this.drawer.close();
+        }
       }
     });
-  }
+  } 
 
-  // Method to handle manual button clicks
   closeDrawerOnNavigation() {
     if (this.drawer) {
       this.drawer.close();
     }
   }
+
+  
 }
