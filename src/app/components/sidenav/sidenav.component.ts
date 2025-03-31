@@ -50,6 +50,11 @@ export class SidenavComponent {
       route: 'invoices',
     },
     {
+      icon: 'person',
+      label: 'profile',
+      route: 'profile',
+    },
+    {
       icon: 'group',
       label: 'about us',
       route: 'about',
