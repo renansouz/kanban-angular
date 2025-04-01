@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { AuthService } from '../../services/auth.service';
@@ -22,6 +23,7 @@ import { AuthService } from '../../services/auth.service';
     MatInputModule,
     MatTabsModule,
     MatCardModule,
+    MatMenuModule,
   ],
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css'],

@@ -3,12 +3,7 @@
     <h1 class="text-3xl font-bold">Build your Favorite Drink</h1>
   </div>
 
-  <button
-    mat-icon-button
-    [matBadge]="totalCartItems"
-    matBadgeColor="warn"
-    matBadgeSize="large"
-  >
+  <button mat-icon-button [matBadge]="totalCartItems">
     <mat-icon>shopping_cart</mat-icon>
   </button>
 </div>
@@ -20,7 +15,6 @@
         <mat-card class="m-4 p-4">
           <h2 class="text-xl font-bold mb-4">Hot Drink</h2>
 
-          <!-- Hot Drink Options -->
           <div class="flex justify-between items-center mb-2">
             <label for="milkHot" class="mr-2">Milk $1</label>
             <div>

@@ -1,1 +1,55 @@
-<p>profile works!</p>
+<div class="flex justify-center items-center mt-12">
+  <div class="border border-slate-300 p-12 shadow-2xl">
+    <h1 class="text-lg font-medium mb-4">Profile</h1>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          required
+          matInput
+          type="text"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          required
+          matInput
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="mb-4">
+        <mat-label>New Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="New Password"
+          formControlName="password"
+        />
+        <mat-hint class="text-slate-500! text-center">
+          Leave blank if you don't want to change your password</mat-hint
+        >
+      </mat-form-field>
+      <button mat-button class="bg-blue-600! text-slate-50!" type="submit">
+        Save Changes
+      </button>
+    </form>
+    @if(successMessage) {
+    <p class="mt-4 text-green-500">
+      {{ successMessage }}
+    </p>
+    } @if (errorMessage) {
+    <p class="mt-4 text-red-500">
+      {{ errorMessage }}
+    </p>
+    }
+  </div>
+</div>
