@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   private firestore = inject(Firestore);
   tasksSubscription?: Subscription;
   user = this.auth.currentUser;
+  isFormOpen: boolean = false;
 
   taskForm: FormGroup;
 
@@ -75,8 +76,13 @@ export class DashboardComponent implements OnInit {
       };
 
       const tasksCollection = collection(this.firestore, `users/${this.user.uid}/tasks`);
-      await addDoc(tasksCollection, newTask);
 
+      try {
+        await addDoc(tasksCollection, newTask).then(() => this.hideTaskForm());
+      } catch (error) {
+        console.error('Error adding task:', error);
+      };
+      
       // Add to the "Ideas" column in the frontend
       this.columns[0].tasks.push(newTask);
 
@@ -164,4 +170,16 @@ export class DashboardComponent implements OnInit {
       destinationColumn.tasks.push(movedTask);
     }
   }
+
+  // Show task form popup
+  showTaskForm() {
+    this.isFormOpen = true;
+  }
+
+  // Hide task form popup
+  hideTaskForm() {
+    this.isFormOpen = false;
+  }
+
+  
 }

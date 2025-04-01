@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { AuthService } from '../../auth.service';
 import { User } from 'firebase/auth';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { DatabaseService } from '../../database.service';
 
 @Component({
@@ -13,22 +13,24 @@ import { DatabaseService } from '../../database.service';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
   user: User | null = null;
   private userSubscription!: Subscription;
+  priceSubscription!: Subscription;
   auth = inject(AuthService);
   db = inject(DatabaseService);
   
-  coffeePrice: number = 2.0;
-  gst: number = 5.0;
-  pst: number = 7.0;
-  milkPrice: number = 0.8;
-  syrupPrice: number = 0.3;
+  coffeePrice$ = new BehaviorSubject<number>(2.0);
+  gst$ = new BehaviorSubject<number>(5.0);
+  pst$ = new BehaviorSubject<number>(7.0);
   hotCoffee: boolean = false;
   caffeine: boolean = true;
-  milkCount: number = 0;
-  syrupCount: number = 0;
-  discount: number = 0.0;
+  milkPrice$ = new BehaviorSubject<number>(0.8);
+  syrupPrice$ = new BehaviorSubject<number>(0.3);
+  milkCount$ = new BehaviorSubject<number>(0);
+  syrupCount$ = new BehaviorSubject<number>(0);
+  discount$ = new BehaviorSubject<number>(0.0);
+
   couponId: string = '';
   subTotal: number = 2.0;
   tax: number = 0.0;
@@ -37,37 +39,53 @@ export class ProductsComponent {
 
 
   ngOnInit() {
+    // Subscribe to auth user
     this.userSubscription = this.auth.getCurrentUser().subscribe(user => {
       this.user = user;
+    });
+
+    // Subscribe to price updates
+    this.priceSubscription = combineLatest([
+      this.coffeePrice$,
+      this.milkCount$,
+      this.syrupCount$,
+      this.milkPrice$,
+      this.syrupPrice$,
+      this.discount$,
+      this.gst$,
+      this.pst$
+    ]).subscribe(([coffeePrice, milkCount, syrupCount, milkPrice, syrupPrice, discount, gst, pst]) => {
+      this.updatePrice(coffeePrice, milkCount, syrupCount, milkPrice, syrupPrice, discount, gst, pst);
     });
   }
 
   ngOnDestroy() {
-    if(this.userSubscription) this.userSubscription.unsubscribe();
+    this.userSubscription?.unsubscribe();
+    this.priceSubscription?.unsubscribe();
   }
 
+
   decrementMilk(): void {
-    this.milkCount >= 0 ? this.milkCount-- : this.milkCount;
+    this.milkCount$.next(Math.max(0, this.milkCount$.value - 1));
   }
 
   incrementMilk(): void {
-    this.milkCount++;
+    this.milkCount$.next(this.milkCount$.value + 1);
   }
 
-  decrementSyrup() {
-    this.syrupCount >= 0 ? this.syrupCount-- : this.syrupCount;
+  decrementSyrup(): void {
+    this.syrupCount$.next(Math.max(0, this.syrupCount$.value - 1));
   }
 
-  incrementSyrup() {
-    this.syrupCount++;
+  incrementSyrup(): void {
+    this.syrupCount$.next(this.syrupCount$.value + 1);
   }
 
   async checkCoupon() {
     try {
       const couponData = await this.db.getCouponInfo(this.couponId);
       if (couponData) {
-        this.discount = couponData.discount;
-        this.updatePrice();
+        this.discount$.next(couponData.discount);
       } else {
         console.log('Coupon not found');
       }
@@ -76,21 +94,31 @@ export class ProductsComponent {
     }
   }
 
-  updatePrice(): void {
-    this.subTotal = this.coffeePrice + (this.milkCount * this.milkPrice) + (this.syrupCount + this.syrupPrice);
-    this.discount = this.subTotal * (this.discount / 100);
-    this.subTotal = this.subTotal - this.discount;
-    this.tax = this.subTotal * ((this.pst / 100) + (this.gst / 100));
-    this.total = this.tax + this.subTotal;
-    this.subTotal = parseFloat(this.subTotal.toFixed(2));
-    this.discount = parseFloat(this.discount.toFixed(2));
-    this.tax = parseFloat(this.tax.toFixed(2));
-    this.total = parseFloat(this.total.toFixed(2));
+  updatePrice(
+    coffeePrice: number,
+    milkCount: number,
+    syrupCount: number,
+    milkPrice: number,
+    syrupPrice: number,
+    discount: number,
+    gst: number,
+    pst: number
+  ): void {
+    let subTotal = coffeePrice + (milkCount * milkPrice) + (syrupCount * syrupPrice);
+    let discountAmount = subTotal * (discount / 100);
+    subTotal -= discountAmount;
+    let tax = subTotal * ((pst / 100) + (gst / 100));
+    let total = subTotal + tax;
+
+    this.subTotal = parseFloat(subTotal.toFixed(2));
+    this.tax = parseFloat(tax.toFixed(2));
+    this.total = parseFloat(total.toFixed(2));
+
     console.log(
-      'Subtotal: ' + this.subTotal + 
-      '\nDiscount: ' + this.discount +
-      '\nTax: ' + this.tax +
-      '\nTotal: ' + this.total
+      'Subtotal:', this.subTotal, 
+      '\nDiscount:', discountAmount.toFixed(2),
+      '\nTax:', this.tax,
+      '\nTotal:', this.total
     );
   }
 
@@ -100,9 +128,9 @@ export class ProductsComponent {
         const orderData = {
           hot: this.hotCoffee,
           caffeine: this.caffeine,
-          milkCount: this.milkCount,
-          syrupCount: this.syrupCount,
-          discount: this.discount,
+          milkCount: this.milkCount$.value,
+          syrupCount: this.syrupCount$.value,
+          discount: this.discount$.value,
           subTotal: this.subTotal,
           total: this.total,
           tax: this.tax,
@@ -112,7 +140,7 @@ export class ProductsComponent {
         const orderId = await this.db.saveOrder(this.user.uid, orderData);
         alert(orderId + '\n Order placed' +
           'Subtotal: ' + this.subTotal + 
-          '\nDiscount: ' + this.discount +
+          '\nDiscount: ' + this.discount$.value +
           '\nTax: ' + this.tax +
           '\nTotal: ' + this.total
         );

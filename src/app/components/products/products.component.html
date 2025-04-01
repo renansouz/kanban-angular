@@ -18,25 +18,25 @@
             <div class="milk-count">
                 <div class="milk-control">
                     <label for="milk-count">Milk: </label>
-                    @if (this.milkCount < 1) {
-                        <button color="primary" (click)="decrementMilk()" (click)="updatePrice()" disabled>-</button>
+                    @if (milkCount$.value < 1) {
+                        <button color="primary" (click)="decrementMilk()"disabled>-</button>
                     } @else {
-                        <button color="primary" (click)="decrementMilk()" (click)="updatePrice()">-</button>
+                        <button color="primary" (click)="decrementMilk()">-</button>
                     }
-                    <input type="text" [(ngModel)]="milkCount" (keyup)="updatePrice()"/>
-                    <button color="primary" (click)="incrementMilk()" (click)="updatePrice()">+</button>
+                    <input type="text" [(ngModel)]="milkCount$.value"/>
+                    <button color="primary" (click)="incrementMilk()">+</button>
                 </div>
             </div>
             <div class="syrup-count">
                 <div class="syrup-control">
                     <label for="syrup-count">Syrup: </label>
-                    @if (this.syrupCount < 1) {
-                        <button color="primary" (click)="decrementSyrup()" (click)="updatePrice()" disabled>-</button>
+                    @if (this.syrupCount$.value < 1) {
+                        <button color="primary" (click)="decrementSyrup()" disabled>-</button>
                     } @else {
-                        <button color="primary" (click)="decrementSyrup()" (click)="updatePrice()">-</button>
+                        <button color="primary" (click)="decrementSyrup()">-</button>
                     }
-                    <input type="text" [(ngModel)]="syrupCount" (keyup)="updatePrice()"/>
-                    <button color="primary" (click)="incrementSyrup()" (click)="updatePrice()">+</button>
+                    <input type="text" [(ngModel)]="syrupCount$.value"/>
+                    <button color="primary" (click)="incrementSyrup()">+</button>
                 </div>
             </div>
             <div class="with-caffeine">
