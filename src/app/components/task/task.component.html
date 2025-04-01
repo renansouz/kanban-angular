@@ -10,7 +10,10 @@
   </button>
 </div>
 
-<div class="m-10 flex" cdkDropListGroup>
+<div
+  class="m-10 flex max-lg:m-5 max-lg:flex-wrap max-lg:justify-center"
+  cdkDropListGroup
+>
   <div class="example-container shadow-2xs">
     <h2>Backlog</h2>
 
@@ -87,7 +90,7 @@
       <div class="example-box flex justify-between items-center" cdkDrag>
         <div>
           <p class="text-lg font-medium">{{ item.title }}</p>
-          <p class="text-xs italic">{{ item.description }}</p>
+          <p class="te xt-xs italic">{{ item.description }}</p>
         </div>
         <button mat-icon-button class="mr-4" (click)="deleteTask('done', item)">
           <mat-icon>delete</mat-icon>
