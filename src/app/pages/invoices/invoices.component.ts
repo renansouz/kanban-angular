@@ -220,29 +220,31 @@ export class InvoicesComponent {
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
+
+    if (order.discount > 0) {
+      page.drawText('Discount: -$' + order.discount.toFixed(2), {
+        x: 50,
+        y: yPosition - 60,
+        size: 12,
+        font: helveticaFont,
+        color: rgb(0, 1, 0),
+      });
+    }
+
     page.drawText(`Tax: $${order.tax.toFixed(2)}`, {
-      x: 50,
-      y: yPosition - 60,
-      size: 12,
-      font: helveticaFont,
-      color: rgb(0, 0, 0),
-    });
-    page.drawText(`Total: $${order.total.toFixed(2)}`, {
       x: 50,
       y: yPosition - 80,
       size: 12,
       font: helveticaFont,
       color: rgb(0, 0, 0),
     });
-    if (order.discountApplied) {
-      page.drawText(`Discount Applied: $${order.discount.toFixed(2)}`, {
-        x: 50,
-        y: yPosition - 100,
-        size: 12,
-        font: helveticaFont,
-        color: rgb(0, 0, 0),
-      });
-    }
+    page.drawText(`Total: $${order.total.toFixed(2)}`, {
+      x: 50,
+      y: yPosition - 100,
+      size: 12,
+      font: helveticaFont,
+      color: rgb(0, 0, 0),
+    });
 
     page.drawText('Contact us: support@ace.com | www.ng-ace.com', {
       x: 50,

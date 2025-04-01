@@ -53,3 +53,8 @@
 .example-box:hover button {
   opacity: 1;
 }
+@media (max-width: 768px) {
+  .example-box button {
+    opacity: 1;
+  }
+}

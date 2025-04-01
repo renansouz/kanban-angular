@@ -3,7 +3,7 @@
 }
 <p class="text-lg font-semibold">you have {{ orders.length }} orders.</p>
 @for (order of orders; track order.id) {
-<div class="bg-slate-50 shadow-2xl w-72 p-4 rounded-lg mb-4">
+<div class="bg-slate-50 shadow-2xl w-72 p-4 rounded-lg mb-4 max-sm:w-full">
   <h1 class="font-black">order# {{ order.orderNumber }}</h1>
   <p>Date: {{ order.createdAt | date }}</p>
   <button (click)="createPdf(order)" class="bg-slate-200!" mat-raised-button>

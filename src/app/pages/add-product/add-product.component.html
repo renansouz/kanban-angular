@@ -8,7 +8,7 @@
   </button>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-sm:w-85 max-sm:-ml-10">
   <div>
     <mat-tab-group [(selectedIndex)]="selectedTabIndex" class="mb-4">
       <mat-tab label="Hot">
@@ -20,6 +20,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="milkHot === 0"
                 (click)="decrementHot('milk')"
@@ -35,6 +36,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementHot('milk')"
               >
@@ -48,6 +50,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="syrupHot === 0"
                 (click)="decrementHot('syrup')"
@@ -63,6 +66,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementHot('syrup')"
               >
@@ -76,6 +80,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="caffeineHot === 0"
                 (click)="decrementHot('caffeine')"
@@ -91,6 +96,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementHot('caffeine')"
               >
@@ -110,6 +116,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="milkCold === 0"
                 (click)="decrementCold('milk')"
@@ -125,6 +132,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementCold('milk')"
               >
@@ -138,6 +146,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="syrupCold === 0"
                 (click)="decrementCold('syrup')"
@@ -153,6 +162,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementCold('syrup')"
               >
@@ -166,6 +176,7 @@
             <div>
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 [disabled]="caffeineCold === 0"
                 (click)="decrementCold('caffeine')"
@@ -181,6 +192,7 @@
               />
               <button
                 mat-mini-fab
+                class="max-sm:w-8! max-sm:h-8!"
                 color="primary"
                 (click)="incrementCold('caffeine')"
               >
