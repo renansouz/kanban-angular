@@ -8,7 +8,7 @@ build/
 # Ignore environment and config files
 src/app/app.config.ts
 src/environments/
-environments/
+environments
 
 # Ignore IDE and editor settings
 .vscode/
