@@ -153,11 +153,9 @@ export class AddProductComponent implements OnInit {
       );
       this.orderNumber = 'INV-' + docRef.id.slice(0, 6).toUpperCase();
 
-      setTimeout(() => {
-        this.router.navigate(['/invoices'], {
-          queryParams: { order: this.orderNumber },
-        });
-      }, 4000);
+      this.router.navigate(['/invoices'], {
+        queryParams: { order: this.orderNumber },
+      });
     } catch (error) {
       console.error('Error placing order:', error);
       alert('Could not place the order. Please try again later.');
