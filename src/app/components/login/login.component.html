@@ -1,11 +1,24 @@
 <div class="flex justify-center items-center -ml-16 mt-12 max-lg:ml-0">
   <div class="border-slate-200 border p-12 shadow-2xl">
-    <h1 class="text-lg font-medium">Login</h1>
-    <p class="my-4 text-base font-light text-slate-950">
-      Don't have an account?
-      <a class="hover:underline" routerLink="/register">Sign up</a>
-    </p>
+    <h1 class="text-lg font-medium text-center mb-5">Log In</h1>
 
+    <a
+      (click)="onGoogleLogin()"
+      class="flex items-center gap-5 mb-4 w-full border border-slate-400 rounded-2xl py-1 cursor-pointer hover:bg-slate-200"
+    >
+      <img
+        src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+        alt="Google Logo"
+        class="w-10 h-10"
+      />
+      <p>Sign in with Google</p>
+    </a>
+
+    <div class="flex items-center my-4">
+      <hr class="flex-grow border-t border-slate-300" />
+      <span class="px-4 text-slate-500 text-sm">or</span>
+      <hr class="flex-grow border-t border-slate-300" />
+    </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col">
       <mat-form-field class="w-64" appearance="fill">
         <mat-label>E-mail</mat-label>
@@ -42,5 +55,11 @@
       {{ errorMessage }}
     </p>
     }
+    <p class="my-4 text-sm text-center text-slate-600">
+      Don't have an account?
+      <a class="hover:underline text-blue-600" routerLink="/register"
+        >Sign up</a
+      >
+    </p>
   </div>
 </div>

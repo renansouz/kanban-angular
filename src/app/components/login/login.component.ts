@@ -62,4 +62,17 @@ export class LoginComponent {
       'An unexpected error occurred. Please try again.'
     );
   }
+
+  onGoogleLogin(): void {
+    this.authService.loginWithGoogle().subscribe({
+      next: () => {
+        this.router.navigateByUrl('/').then(() => {
+          window.location.reload();
+        });
+      },
+      error: (error) => {
+        this.errorMessage = this.getErrorMessage(error.code);
+      },
+    });
+  }
 }

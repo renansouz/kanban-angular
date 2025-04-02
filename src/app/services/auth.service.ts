@@ -12,6 +12,8 @@ import {
 import { from, Observable } from 'rxjs';
 import { UserInterface } from '../user.interface';
 
+import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -86,5 +88,11 @@ export class AuthService {
     }
 
     return from(Promise.all(promises).then(() => {}));
+  }
+
+  loginWithGoogle(): Observable<void> {
+    const provider = new GoogleAuthProvider();
+    const promise = signInWithPopup(this.firebaseAuth, provider).then(() => {});
+    return from(promise);
   }
 }
