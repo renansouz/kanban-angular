@@ -17,6 +17,7 @@
 .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
+  background-color: white;
   color: rgba(0, 0, 0, 0.87);
   align-items: center;
   cursor: move;
