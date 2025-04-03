@@ -2,12 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { RouterLink } from '@angular/router';
 
@@ -18,6 +26,7 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     RouterLink,
   ],
   templateUrl: './register.component.html',
@@ -28,22 +37,37 @@ export class RegisterComponent {
   http = inject(HttpClient);
   authService = inject(AuthService);
   router = inject(Router);
+  hidePassword = true; // For toggling password visibility
+  hideConfirmPassword = true; // For toggling confirm password visibility
 
-  form = this.fb.nonNullable.group({
-    username: [
-      '',
-      [Validators.required, Validators.pattern(/^[a-zA-Z0-9_]+$/)],
-    ],
-    email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/.{8,}/),
+  passwordsMatchValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  };
+
+  form = this.fb.nonNullable.group(
+    {
+      username: [
+        '',
+        [Validators.required, Validators.pattern(/^[a-zA-Z0-9_]+$/)],
       ],
-    ],
-  });
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/),
+        ],
+      ],
+      confirmPassword: ['', [Validators.required]],
+    },
+    { validators: this.passwordsMatchValidator }
+  );
   errorMessage: string | null = null;
 
   onSubmit(): void {
