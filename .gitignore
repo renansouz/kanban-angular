@@ -1,7 +1,6 @@
 # Ignore Angular build and dependency directories
 .angular/
 node_modules/
-
 dist/
 build/
 
