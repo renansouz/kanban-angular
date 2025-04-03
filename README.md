@@ -1,4 +1,5 @@
 # Ace 🔥- Kanban Board
+<img src="https://i.imgur.com/Eim4CFK.png">
 
 Ace Kanban Board is a powerful and intuitive task management tool designed to help individuals and teams organize their workflow efficiently. By leveraging the Kanban methodology, Ace enables users to visually track task progress, improve productivity, and streamline project management. Whether you're managing personal tasks or collaborating on a team project, Ace offers a smooth and responsive experience.
 
