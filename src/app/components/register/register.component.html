@@ -32,8 +32,14 @@
           placeholder="Username"
           formControlName="username"
         />
+        <mat-error *ngIf="form.get('username')?.hasError('required')">
+          Username is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('username')?.hasError('pattern')">
+          Username can only contain letters, numbers, and underscores.
+        </mat-error>
       </mat-form-field>
-      <mat-form-field apperance="fill">
+      <mat-form-field appearance="fill">
         <mat-label>E-mail</mat-label>
         <input
           required
@@ -42,8 +48,15 @@
           placeholder="Email"
           formControlName="email"
         />
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
         <input
           required
           matInput
@@ -51,16 +64,22 @@
           placeholder="Password"
           formControlName="password"
         />
+        <mat-error *ngIf="form.get('password')?.hasError('required')">
+          Password is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+          Password must be at least 8 characters long.
+        </mat-error>
       </mat-form-field>
       <button mat-button class="bg-blue-400! text-white!" type="submit">
         Sign Up
       </button>
     </form>
-    @if (errorMessage) {
+    <!-- @if (errorMessage) {
     <p class="text-red-500 text-center mt-4 break-words max-w-60">
       {{ errorMessage }}
     </p>
-    }
+    } -->
     <p class="mt-4 text-sm text-center text-slate-600">
       Already have an account?
       <a class="hover:underline text-blue-600" routerLink="/login">Sign in</a>

@@ -1,4 +1,6 @@
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +13,13 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    RouterLink,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -22,9 +30,19 @@ export class RegisterComponent {
   router = inject(Router);
 
   form = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    username: [
+      '',
+      [Validators.required, Validators.pattern(/^[a-zA-Z0-9_]+$/)],
+    ],
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/.{8,}/),
+      ],
+    ],
   });
   errorMessage: string | null = null;
 
@@ -51,6 +69,10 @@ export class RegisterComponent {
       'auth/wrong-password': 'Incorrect password.',
       'auth/too-many-requests':
         'Too many login attempts. Please try again later.',
+      'validation/username-invalid':
+        'Username can only contain letters, numbers, and underscores.',
+      'validation/password-invalid':
+        'Password must be at least 8 characters long.',
     };
 
     return (
