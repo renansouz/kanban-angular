@@ -17,6 +17,12 @@
           placeholder="Username"
           formControlName="username"
         />
+        <mat-error *ngIf="form.get('username')?.hasError('required')">
+          Username is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('username')?.hasError('pattern')">
+          Username can only contain letters, numbers, and underscores.
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
@@ -27,6 +33,12 @@
           placeholder="Email"
           formControlName="email"
         />
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" class="mb-4">
         <mat-label>New Password</mat-label>
@@ -36,6 +48,9 @@
           placeholder="New Password"
           formControlName="password"
         />
+        <mat-error *ngIf="form.get('password')?.hasError('minlength')">
+          Password must be at least 8 characters long.
+        </mat-error>
         <mat-hint class="text-slate-500! text-center">
           Leave blank if you don't want to change your password</mat-hint
         >

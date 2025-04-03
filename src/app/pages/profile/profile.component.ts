@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { MatInputModule } from '@angular/material/input';
@@ -16,9 +17,12 @@ export class ProfileComponent implements OnInit {
   authService = inject(AuthService);
 
   form = this.fb.group({
-    username: ['', Validators.required],
+    username: [
+      '',
+      [Validators.required, Validators.pattern(/^[a-zA-Z0-9_]+$/)],
+    ],
     email: ['', [Validators.required, Validators.email]],
-    password: [''],
+    password: ['', [Validators.minLength(8), Validators.pattern(/.{8,}/)]],
   });
 
   successMessage: string = '';
